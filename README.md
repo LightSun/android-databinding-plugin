@@ -14,7 +14,7 @@ a simple plugin of android-databinding framework.
 
 - 4, at the res directory of android studio, right-click and select android-databinding then follow it.
   and then you can enjoy the android-databinding framework.
-  <img src="/3.jpg" alt="use demo " width="1027px" height="768px"/>
+  <img src="/3.png" alt="use demo " width="1027px" height="768px"/>
 
 
 ## thanks
