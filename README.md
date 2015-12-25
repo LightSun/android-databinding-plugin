@@ -5,7 +5,7 @@ a simple plugin of android-databinding framework.
 - 1, click [here]("https://github.com/LightSun/android-databinding-plugin/releases") to donwload the zip
  
 - 2 , Add the xml schema file (android_databinding.xsd )to android studio. 
-   and the uri is 'http://schemas.android.com/heaven7/android-databinding/1' (must).
+   and the URI is 'http://schemas.android.com/heaven7/android-databinding/1' (must).
   <img src="/2.jpg" alt="add xsd file to as" width="1163px" height="711px"/>
 
 - 3, install the plugin 'android_databinding_plugin'. step:
