@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://schemas.android.com/heaven7/android-databinding/1"
+	xmlns="http://www.w3.org/2001/XMLSchema" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:c="http://schemas.android.com/heaven7/android-databinding/1"
+	elementFormDefault="qualified" 
+	attributeFormDefault="unqualified"
+	version="1.0">
+	
+	<xsd:annotation>
+	    <xsd:documentation>
+	
+	      DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
+	      
+	     Copyright 2015   
+	                    heaven7(donshine723@gmail.com)
+	
+	    Licensed under the Apache License, Version 2.0 (the "License");
+	    you may not use this file except in compliance with the License.
+	    You may obtain a copy of the License at
+	
+	       http://www.apache.org/licenses/LICENSE-2.0
+	
+	    Unless required by applicable law or agreed to in writing, software
+	    distributed under the License is distributed on an "AS IS" BASIS,
+	    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	    See the License for the specific language governing permissions and
+	    limitations under the License.
+	    </xsd:documentation>
+    </xsd:annotation>
+    <xsd:annotation>
+	    <xsd:documentation>
+	         This is the XML Schema for the android-databinding framework.
+	    </xsd:documentation>
+    </xsd:annotation>
+
+	<!--根元素 DataBinding -->
+	<xsd:element name="DataBinding" type="c:DataBindingType" />
+
+	<xsd:complexType name="DataBindingType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">
+				root element.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="data" type="c:dataType" minOccurs="1"
+				maxOccurs="1" />
+			<xsd:element name="bind" type="c:bindType" minOccurs="0"
+				maxOccurs="unbounded" />
+			<xsd:element name="bindAdapter" type="c:bindAdapterType" minOccurs="0"
+				maxOccurs="unbounded" />
+		</xsd:sequence>
+		<xsd:attribute name="version" type="xsd:string" use="optional"
+			fixed="1.0" />
+	</xsd:complexType>
+	
+	<!-- *************************** begin bindAdapter **************************** -->
+	
+	<!-- define bind adapter element -->
+	<xsd:complexType name="bindAdapterType">
+	    <xsd:annotation>
+			<xsd:documentation xml:lang="en">
+				the bindAdapter element is used for Adapter view or recycleView.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+		    <xsd:element name="item" type="c:itemType" minOccurs="1">
+		    </xsd:element> 
+		</xsd:sequence>
+		<xsd:attributeGroup ref="c:bindAdapterAttrType"></xsd:attributeGroup>
+	</xsd:complexType>
+	
+	<!-- define bind adapter element -->
+	<xsd:complexType name="itemType">
+	    <xsd:annotation>
+			<xsd:documentation xml:lang="en">
+				the item element is used for the item of adapter.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+		     <xsd:element name="property" type="c:itemPropType" minOccurs="0" maxOccurs="unbounded"/>
+		     <xsd:element name="bind" type="c:bindType_in_item" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attributeGroup ref="c:itemAttrType"></xsd:attributeGroup>
+	</xsd:complexType>
+	
+	<xsd:complexType name="itemPropType">
+	      <xsd:annotation>
+			<xsd:documentation xml:lang="en">
+				define the property element of item .
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="c:simple_nonEmptyStringType">
+			     <xsd:attribute name="name" use="required" type="c:simple_nonEmptyStringType"/>
+		         <xsd:attribute name="referVariable" use="optional" type="c:referVariableAttrType"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+		
+	</xsd:complexType>
+	
+	<xsd:attributeGroup name="itemAttrType">
+	    <xsd:attribute name="layout" use="required" type="c:simple_nonEmptyStringType"/>
+	    <xsd:attribute name="referVariable" use="optional" type="c:referVariableAttrType"/>
+	    <xsd:attribute name="tag" use="optional" type="int">
+	        <xsd:annotation>
+				<xsd:documentation xml:lang="en">
+					the tag attribute indicate you are bind multi items.
+					and this is relative the interface ITag.
+				</xsd:documentation>
+		    </xsd:annotation>
+	    </xsd:attribute>
+	</xsd:attributeGroup>
+	
+	<xsd:attributeGroup name="bindAdapterAttrType">
+	    <xsd:attribute name="id" use="required" type="c:uniqueType"/>
+	    <xsd:attribute name="referVariable" use="required" type="c:referVariableAttrType"/>
+	    <xsd:attribute name="selectMode" use="required" >
+	        <xsd:simpleType>
+	            <xsd:restriction base="xsd:token">
+	                <xsd:length value="1"></xsd:length>
+	                <xsd:enumeration value="1"></xsd:enumeration>
+	                <xsd:enumeration value="2"></xsd:enumeration>
+	            </xsd:restriction>
+	        </xsd:simpleType>
+	    </xsd:attribute>
+	</xsd:attributeGroup>
+	
+	<!-- *************************** end bindAdapter **************************** -->
+
+	<!-- define bind element -->
+	<xsd:complexType name="bindType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">
+				define the bind element .
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:choice minOccurs="1" maxOccurs="unbounded">
+			  <xsd:element name="property" type="c:propType1" />
+			  <xsd:element name="imageProperty" type="c:imagePropType"/>
+		</xsd:choice>
+		<xsd:attributeGroup ref="c:bindAttrType" />
+	</xsd:complexType>
+	
+	<xsd:complexType name="bindType_in_item">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">
+				define the bind element .
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:choice minOccurs="1" maxOccurs="unbounded">
+			  <xsd:element name="property" type="c:propType1" />
+			  <xsd:element name="imageProperty" type="c:imagePropType"/>
+		</xsd:choice>
+		<xsd:attributeGroup ref="c:bindAttrType_in_item" />
+	</xsd:complexType>
+
+	<!-- define imageProperty element -->
+	<xsd:complexType name="imagePropType">
+	    <xsd:annotation>
+			<xsd:documentation xml:lang="en">
+				define the imageProperty element .
+			</xsd:documentation>
+		</xsd:annotation>
+		
+		<!--  children -->
+		<xsd:sequence>
+			<xsd:element name="roundSize"   type="c:roundSizeType" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="corners"     type="c:cornersType" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="borderWidth" type="c:borderWidthType" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="borderColor" type="c:borderColorType" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="url"         type="c:urlType" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="default"     type="c:defaultType" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="errorResId"  type="c:errorResIdType" minOccurs="0" maxOccurs="1"/>
+		</xsd:sequence>
+		
+		<xsd:attributeGroup ref="c:imagePropAttrType"></xsd:attributeGroup>
+		
+	</xsd:complexType>
+	
+<!--*************************** begin imageProperty child **************************-->
+	
+	<xsd:complexType name="borderWidthType">
+		<xsd:simpleContent>
+			<xsd:extension base="c:simple_nonEmptyStringType"/>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="borderColorType">
+		<xsd:simpleContent>
+			<xsd:extension base="c:simple_nonEmptyStringType"/>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="urlType">
+		<xsd:simpleContent>
+			<xsd:extension base="c:simple_nonEmptyStringType"/>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="defaultType">
+		<xsd:simpleContent>
+			<xsd:extension base="c:simple_nonEmptyStringType"/>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="errorResIdType">
+		<xsd:simpleContent>
+			<xsd:extension base="c:simple_nonEmptyStringType"/>
+		</xsd:simpleContent>
+	</xsd:complexType>
+
+	<!-- define roundSize element -->
+	<xsd:complexType name="roundSizeType">
+	   <xsd:annotation>
+			<xsd:documentation xml:lang="en">
+				define the roundSize element .
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="c:simple_nonEmptyStringType"/>
+		</xsd:simpleContent>
+	</xsd:complexType>
+
+	<!-- define corners element -->
+	<xsd:complexType name="cornersType">
+	    <xsd:annotation>
+			<xsd:documentation xml:lang="en">
+				define the corners element .
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+		    <xsd:element name="topRight" type="c:topRightType" minOccurs="0" maxOccurs="1"/>
+		    <xsd:element name="topLeft" type="c:topLeftType" minOccurs="0" maxOccurs="1"/>
+		    <xsd:element name="bottomLeft" type="c:bottomLeftType" minOccurs="0" maxOccurs="1"/>
+		    <xsd:element name="bottomRight" type="c:bottomRightType" minOccurs="0" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="topRightType">
+		<xsd:simpleContent>
+			<xsd:extension base="c:simple_nonEmptyStringType"/>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="topLeftType">
+		<xsd:simpleContent>
+			<xsd:extension base="c:simple_nonEmptyStringType"/>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="bottomLeftType">
+		<xsd:simpleContent>
+			<xsd:extension base="c:simple_nonEmptyStringType"/>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="bottomRightType">
+		<xsd:simpleContent>
+			<xsd:extension base="c:simple_nonEmptyStringType"/>
+		</xsd:simpleContent>
+	</xsd:complexType>
+
+<!--*************************** end imageProperty child **************************-->
+
+	<!-- define the property element -->
+	<xsd:complexType name="propType1" >
+		<xsd:simpleContent>
+			<xsd:extension base="c:simple_nonEmptyStringType">
+				<xsd:attributeGroup ref="c:propAttrType" />
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+
+	<!-- define data element -->
+	<xsd:complexType name="dataType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">
+				define the associated data .
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="variable" type="c:variableType"
+				minOccurs="1" maxOccurs="unbounded" />
+			<xsd:element name="import" type="c:importType" minOccurs="0"
+				maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- define variable element -->
+	<xsd:complexType name="variableType">
+		<xsd:attributeGroup ref="c:variableAttrGroup" />
+	</xsd:complexType>
+
+	<!-- define import -->
+	<xsd:complexType name="importType">
+		<xsd:attribute name="classname" use="required" type="c:classnameAttrType">
+		</xsd:attribute>
+		<xsd:attribute name="alias" use="optional">
+			<xsd:simpleType>
+				<xsd:restriction base="c:simple_nonEmptyStringType">
+					<xsd:pattern value="[0-9a-zA-Z_]+"></xsd:pattern>
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+	</xsd:complexType>
+
+	<!-- *********************** attrs ***************************** -->
+
+	<xsd:attributeGroup name="imagePropAttrType">
+		<xsd:attribute name="id" type="c:simple_nonEmptyStringType" use="optional"></xsd:attribute>
+		<xsd:attribute name="referVariable" type="c:referVariableAttrType" use="optional">
+		</xsd:attribute>
+		<xsd:attribute name="type" use="required">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:token">
+					<xsd:enumeration value="round" />
+					<xsd:enumeration value="circle" />
+					<xsd:enumeration value="oval" />
+					<xsd:minLength value="4" />
+					<xsd:maxLength value="6" />
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+	</xsd:attributeGroup>
+
+	<!-- attr of property element -->
+	<xsd:attributeGroup name="propAttrType">
+		<xsd:attribute name="id" type="c:simple_nonEmptyStringType" use="optional">
+		</xsd:attribute>
+		<xsd:attribute name="name" type="c:simple_nonEmptyStringType" use="optional">
+		</xsd:attribute>
+		<xsd:attribute name="referVariable" type="c:referVariableAttrType" use="optional">
+		</xsd:attribute>
+	</xsd:attributeGroup>
+
+	<!-- attr of bind element -->
+	<xsd:attributeGroup name="bindAttrType">
+		<xsd:attribute name="id" use="optional" type="c:uniqueType">
+		</xsd:attribute>
+		<xsd:attribute name="referVariable" use="optional" type="c:referVariableAttrType">
+		</xsd:attribute>
+	</xsd:attributeGroup>
+	
+	<xsd:attributeGroup name="bindAttrType_in_item">
+		<xsd:attribute name="id" use="optional" type="c:simple_nonEmptyStringType">
+		</xsd:attribute>
+		<xsd:attribute name="referVariable" use="optional" type="c:referVariableAttrType">
+		</xsd:attribute>
+	</xsd:attributeGroup>
+
+	<!--attr of variable -->
+	<xsd:attributeGroup name="variableAttrGroup">
+		<xsd:attribute name="name" use="required" type="c:uniqueType">
+		</xsd:attribute>
+		<xsd:attribute name="classname" use="required" type="c:classnameAttrType">
+		</xsd:attribute>
+		<xsd:attribute name="type" use="required">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:token">
+					<xsd:enumeration value="bean" />
+					<xsd:enumeration value="callback" />
+					<xsd:minLength value="4" />
+					<xsd:maxLength value="8" />
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+	</xsd:attributeGroup>
+	
+<!--**************************** the base *********************************** -->
+
+   <xsd:simpleType name="simple_nonEmptyStringType">
+    <xsd:annotation>
+      <xsd:documentation>
+
+        This type defines a string which contains at least one
+        character.
+        
+      </xsd:documentation>
+    </xsd:annotation>
+     <xsd:restriction base="xsd:string">
+       <xsd:whiteSpace value="replace"></xsd:whiteSpace>
+       <xsd:minLength value="1"/>
+     </xsd:restriction>
+  </xsd:simpleType>
+  
+   <xsd:simpleType name="uniqueType">
+    <xsd:annotation>
+      <xsd:documentation>
+
+        This type defines a value is unique.
+        
+      </xsd:documentation>
+    </xsd:annotation>
+     <xsd:restriction base="xsd:ID">
+          <xsd:minLength value="1"/>
+     </xsd:restriction>
+  </xsd:simpleType>
+  
+
+   <xsd:simpleType name="referVariableAttrType">
+		<xsd:restriction base="c:simple_nonEmptyStringType">
+			<xsd:pattern value="([0-9a-zA-Z_]+)([,][0-9a-zA-Z_]+)*"></xsd:pattern>
+		</xsd:restriction>
+   </xsd:simpleType>
+   
+   <xsd:simpleType name="classnameAttrType">
+		<xsd:restriction base="c:simple_nonEmptyStringType">
+			  <xsd:pattern value="([0-9a-zA-Z_]+)([\\.][0-9a-zA-Z_]+[$]?[0-9a-zA-Z_]+)*">
+			          </xsd:pattern>
+		</xsd:restriction>
+   </xsd:simpleType>
+   
+</xsd:schema>	
