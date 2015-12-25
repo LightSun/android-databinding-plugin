@@ -2,7 +2,8 @@
 a simple plugin of android-databinding framework.
 
 ## How to use ?
-first 
+- first , add xsd to android studio.
+  <img src="/2.jpg" alt="Demo Screen Capture" width="1163px" height="711px"/>
 
 ## thanks
 - thanks for 北京-Cage with 厦门-小凡 which comes from the qq group of android开源交流4群.
