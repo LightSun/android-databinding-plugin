@@ -2,7 +2,7 @@
 a simple plugin of android-databinding framework.
 
 ## How to use ?
-- 1, click [here]("https://github.com/LightSun/android-databinding-plugin/releases") to donwload the zip
+- 1, click [here](https://github.com/LightSun/android-databinding-plugin/releases) to donwload the zip
  
 - 2 , Add the xml schema file (android_databinding.xsd )to android studio. 
    and the URI is 'http://schemas.android.com/heaven7/android-databinding/1' (must).
