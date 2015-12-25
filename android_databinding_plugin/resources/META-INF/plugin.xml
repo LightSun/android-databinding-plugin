@@ -1,0 +1,45 @@
+<idea-plugin version="2">
+  <id>com.heaven7.plugin.android.databinding</id>
+  <name>android databinding</name>
+  <version>1.0</version>
+  <vendor email="donshine723@gmail.com" url="https://github.com/LightSun/android-databinding">YourCompany</vendor>
+
+  <description><![CDATA[
+      this is a plugin of android-databinding framework.<br>
+      <em>most HTML tags may be used</em>
+    ]]></description>
+
+  <change-notes><![CDATA[
+      a simple plugin of android-databinding.<br>
+      <em>most HTML tags may be used</em>
+    ]]>
+  </change-notes>
+
+  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+  <idea-version since-build="141.0"/>
+
+  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+       on how to target different products -->
+  <!-- uncomment to enable plugin in all products
+  <depends>com.intellij.modules.lang</depends>
+  -->
+
+  <extensions defaultExtensionNs="com.intellij">
+    <!-- Add your extensions here -->
+  </extensions>
+  <depends>com.intellij.modules.lang</depends>
+
+  <actions>
+    <!-- Add your actions here -->
+    <action id="android_databind"
+            class="com.heaven7.plugin.action.AndroidDatabindConfigAction"
+            text="android-databinding"
+            icon="/icon/1.png"
+            description="generate android-databinding config xml files"
+      >
+      <add-to-group group-id="NewGroup" anchor="after"
+                    relative-to-action="NewAndroidAssetImage"/>
+    </action>
+  </actions>
+
+</idea-plugin>
