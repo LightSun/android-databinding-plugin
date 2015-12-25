@@ -1,9 +1,13 @@
 ## android-databinding-plugin
 a simple plugin of android-databinding framework.
 
+## How to use ?
+first 
+
 ## thanks
 - thanks for 北京-Cage with 厦门-小凡 which comes from the qq group of android开源交流4群.
    they help me designed the icon of this plugin. 
+
 
 ## License
 
