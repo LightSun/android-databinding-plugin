@@ -20,6 +20,7 @@ a simple plugin of android-databinding framework.
 ## thanks
 - thanks for 北京-Cage with 厦门-小凡 which comes from the qq group of android开源交流4群.
    they help me designed the icon of this plugin. 
+- thanks for joker , he gives me some data of  develop plugin.
 
 
 ## License
